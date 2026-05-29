@@ -1,0 +1,17 @@
+{
+  "scene_id": "ceramic_idol_turntable",
+  "prompt": "A small glossy ceramic sci-fi desk idol, somewhere between a toy robot and a crystal mushroom, with teal glass highlights, amber side fins, and tiny black eyes.",
+  "views": 48,
+  "image_size": 384,
+  "camera": {
+    "radius": 3.2,
+    "height": 1.05,
+    "target": [0.0, 0.0, 0.22],
+    "fov_degrees": 48.0
+  },
+  "rendering": {
+    "background": "soft studio gradient",
+    "lighting": "large key light plus rim fill",
+    "pose_source": "synthetic exact camera matrices"
+  }
+}

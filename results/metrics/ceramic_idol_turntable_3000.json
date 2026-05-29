@@ -1,0 +1,17 @@
+{
+  "experiment_name": "ceramic_idol_turntable",
+  "method_name": "splatfacto",
+  "checkpoint": "outputs/ceramic_idol_turntable/splatfacto/long_3000/nerfstudio_models/step-000002999.ckpt",
+  "results": {
+    "psnr": 18.77025604248047,
+    "psnr_std": 1.409356951713562,
+    "ssim": 0.9213593602180481,
+    "ssim_std": 0.004899081774055958,
+    "lpips": 0.3240951895713806,
+    "lpips_std": 0.05072329565882683,
+    "num_rays_per_sec": 3564600.0,
+    "num_rays_per_sec_std": 3721117.75,
+    "fps": 24.17399024963379,
+    "fps_std": 25.235445022583008
+  }
+}

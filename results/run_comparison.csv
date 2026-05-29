@@ -1,0 +1,3 @@
+run,iterations,psnr,ssim,lpips,fps,export_mb,metrics_path,export_path
+700_iters,700,22.7067,0.927445,0.351811,57.6329,3.70466,results\metrics\ceramic_idol_turntable_700.json,exports\ceramic_idol_turntable_700\ceramic_idol_turntable_700.ply
+3000_iters,3000,18.7703,0.921359,0.324095,24.174,28.6729,results\metrics\ceramic_idol_turntable_3000.json,exports\ceramic_idol_turntable_3000\ceramic_idol_turntable_3000.ply
