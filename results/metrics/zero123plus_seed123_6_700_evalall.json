@@ -1,0 +1,17 @@
+{
+  "experiment_name": "zero123plus_seed123_6_700_evalall",
+  "method_name": "splatfacto",
+  "checkpoint": "outputs/zero123plus_seed123_6_700_evalall/splatfacto/700/nerfstudio_models/step-000000699.ckpt",
+  "results": {
+    "psnr": 27.912872314453125,
+    "psnr_std": 1.636330485343933,
+    "ssim": 0.9244945049285889,
+    "ssim_std": 0.0055190264247357845,
+    "lpips": 0.19187915325164795,
+    "lpips_std": 0.014286566525697708,
+    "num_rays_per_sec": 6424227.0,
+    "num_rays_per_sec_std": 3213871.75,
+    "fps": 43.567081451416016,
+    "fps_std": 21.795461654663086
+  }
+}

@@ -22,6 +22,9 @@ docker run \
   -e DATASET \
   -e EXPERIMENT \
   -e RUN_ID \
+  -e EVAL_MODE \
+  -e EVAL_INTERVAL \
+  -e TRAIN_SPLIT_FRACTION \
   -e EXPORT_MODELS \
   -v "${WORKSPACE}:/workspace" \
   -v "${CACHE_DIR}:/home/user/.cache" \

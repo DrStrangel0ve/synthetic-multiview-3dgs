@@ -1,0 +1,7 @@
+{
+  "run_id": "700",
+  "dataset": "datasets/zero123plus_ceramic_idol_seed123_6",
+  "experiment": "zero123plus_seed123_6_700_evalall",
+  "max_iters": 700,
+  "eval_mode": "all"
+}

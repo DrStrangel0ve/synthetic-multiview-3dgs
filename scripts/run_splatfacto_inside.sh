@@ -6,6 +6,9 @@ TRAIN_TIMEOUT_MIN="${TRAIN_TIMEOUT_MIN:-90}"
 DATASET="${DATASET:-datasets/ceramic_idol_turntable}"
 EXPERIMENT="${EXPERIMENT:-ceramic_idol_turntable}"
 RUN_ID="${RUN_ID:-$(date -u +%Y%m%d_%H%M%S)}"
+EVAL_MODE="${EVAL_MODE:-fraction}"
+EVAL_INTERVAL="${EVAL_INTERVAL:-8}"
+TRAIN_SPLIT_FRACTION="${TRAIN_SPLIT_FRACTION:-0.9}"
 EXPORT_MODELS="${EXPORT_MODELS:-1}"
 
 mkdir -p results/metrics results/logs results/status results/run_configs results/summaries exports outputs
@@ -25,13 +28,15 @@ Path("$run_config_path").write_text(json.dumps({
   "run_id": "$RUN_ID",
   "dataset": "$DATASET",
   "experiment": "$EXPERIMENT",
-  "max_iters": int("$MAX_ITERS")
+  "max_iters": int("$MAX_ITERS"),
+  "eval_mode": "$EVAL_MODE",
+  "eval_interval": int("$EVAL_INTERVAL"),
+  "train_split_fraction": float("$TRAIN_SPLIT_FRACTION")
 }, indent=2), encoding="utf-8")
 PY
 
 echo "train ${EXPERIMENT}"
 if ! timeout "${TRAIN_TIMEOUT_MIN}m" ns-train splatfacto \
-  --data "$DATASET" \
   --output-dir outputs \
   --experiment-name "$EXPERIMENT" \
   --timestamp "$RUN_ID" \
@@ -39,6 +44,11 @@ if ! timeout "${TRAIN_TIMEOUT_MIN}m" ns-train splatfacto \
   --steps-per-save "$MAX_ITERS" \
   --steps-per-eval-all-images "$MAX_ITERS" \
   --vis tensorboard \
+  nerfstudio-data \
+  --data "$DATASET" \
+  --eval-mode "$EVAL_MODE" \
+  --eval-interval "$EVAL_INTERVAL" \
+  --train-split-fraction "$TRAIN_SPLIT_FRACTION" \
   >"$train_log" 2>&1; then
   python3 - <<PY
 import json

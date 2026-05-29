@@ -1,0 +1,2 @@
+dataset,views,psnr,ssim,lpips,metrics_path
+zero123plus_seed123_6_700_evalall,,27.9129,0.924495,0.191879,results/metrics/zero123plus_seed123_6_700_evalall.json

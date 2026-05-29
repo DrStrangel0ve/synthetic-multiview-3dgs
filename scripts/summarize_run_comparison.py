@@ -15,6 +15,7 @@ RUNS = [
         "source": "procedural",
         "views": 48,
         "iterations": 700,
+        "eval": "fraction",
         "metrics": Path("results/metrics/ceramic_idol_turntable_700.json"),
         "export": Path("exports/ceramic_idol_turntable_700/ceramic_idol_turntable_700.ply"),
     },
@@ -23,6 +24,7 @@ RUNS = [
         "source": "procedural",
         "views": 48,
         "iterations": 3000,
+        "eval": "fraction",
         "metrics": Path("results/metrics/ceramic_idol_turntable_3000.json"),
         "export": Path("exports/ceramic_idol_turntable_3000/ceramic_idol_turntable_3000.ply"),
     },
@@ -31,8 +33,58 @@ RUNS = [
         "source": "generated contact sheet",
         "views": 16,
         "iterations": 700,
+        "eval": "fraction",
         "metrics": Path("results/metrics/genai_ceramic_idol_16_700.json"),
         "export": Path("exports/genai_ceramic_idol_16_700/genai_ceramic_idol_16_700.ply"),
+    },
+    {
+        "run": "zero123plus_seed123_6_evalall",
+        "source": "Zero123++ seed 123",
+        "views": 6,
+        "iterations": 700,
+        "eval": "all frames",
+        "metrics": Path("results/metrics/zero123plus_seed123_6_700_evalall.json"),
+        "export": Path("exports/zero123plus_seed123_6_700_evalall/zero123plus_seed123_6_700_evalall.ply"),
+    },
+    {
+        "run": "zero123plus_seed123_6_holdout",
+        "source": "Zero123++ seed 123",
+        "views": 6,
+        "iterations": 700,
+        "eval": "interval 3",
+        "metrics": Path("results/metrics/zero123plus_seed123_6_700_interval3.json"),
+        "export": Path("exports/zero123plus_seed123_6_700_interval3/zero123plus_seed123_6_700_interval3.ply"),
+    },
+    {
+        "run": "zero123plus_seed123_steps75_holdout",
+        "source": "Zero123++ seed 123, 75 steps",
+        "views": 6,
+        "iterations": 700,
+        "eval": "interval 3",
+        "metrics": Path("results/metrics/zero123plus_seed123_steps75_6_700_interval3.json"),
+        "export": Path(
+            "exports/zero123plus_seed123_steps75_6_700_interval3/zero123plus_seed123_steps75_6_700_interval3.ply"
+        ),
+    },
+    {
+        "run": "zero123plus_seed456_holdout",
+        "source": "Zero123++ seed 456",
+        "views": 6,
+        "iterations": 700,
+        "eval": "interval 3",
+        "metrics": Path("results/metrics/zero123plus_seed456_6_700_interval3.json"),
+        "export": Path("exports/zero123plus_seed456_6_700_interval3/zero123plus_seed456_6_700_interval3.ply"),
+    },
+    {
+        "run": "zero123plus_seed456_masked_holdout",
+        "source": "Zero123++ seed 456, masks",
+        "views": 6,
+        "iterations": 700,
+        "eval": "interval 3",
+        "metrics": Path("results/metrics/zero123plus_seed456_6_masked_700_interval3.json"),
+        "export": Path(
+            "exports/zero123plus_seed456_6_masked_700_interval3/zero123plus_seed456_6_masked_700_interval3.ply"
+        ),
     },
 ]
 
@@ -54,6 +106,7 @@ def row_for(run: dict[str, Any]) -> dict[str, Any]:
         "source": run["source"],
         "views": run["views"],
         "iterations": run["iterations"],
+        "eval": run["eval"],
         "psnr": results.get("psnr"),
         "ssim": results.get("ssim"),
         "lpips": results.get("lpips"),
@@ -81,17 +134,17 @@ def main() -> None:
     lines = [
         "# Synthetic Splatfacto Run Comparison",
         "",
-        "| Run | Source | Views | Iterations | PSNR | SSIM | LPIPS | FPS | Export MB |",
-        "| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
+        "| Run | Source | Views | Iterations | Eval | PSNR | SSIM | LPIPS | FPS | Export MB |",
+        "| --- | --- | ---: | ---: | --- | ---: | ---: | ---: | ---: | ---: |",
     ]
     for row in rows:
         lines.append(
-            f"| `{row['run']}` | {row['source']} | {row['views']} | {row['iterations']} | {fmt(row['psnr'])} | {fmt(row['ssim'])} | {fmt(row['lpips'])} | {fmt(row['fps'])} | {fmt(row['export_mb'])} |"
+            f"| `{row['run']}` | {row['source']} | {row['views']} | {row['iterations']} | {row['eval']} | {fmt(row['psnr'])} | {fmt(row['ssim'])} | {fmt(row['lpips'])} | {fmt(row['fps'])} | {fmt(row['export_mb'])} |"
         )
     lines.extend(
         [
             "",
-            "In this first synthetic run, the controlled procedural 700-iteration checkpoint has the best PSNR/SSIM. The generated contact-sheet run reconstructs, but its lower scores reflect cross-view inconsistency and the smaller 16-view orbit.",
+            "Zero123++ is the current best pure-generation path. Eval-all is an upper bound because it evaluates training views; interval-3 is the fairer tiny-dataset holdout.",
             "",
         ]
     )

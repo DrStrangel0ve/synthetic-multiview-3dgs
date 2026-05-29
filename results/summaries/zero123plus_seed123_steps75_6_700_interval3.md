@@ -1,0 +1,5 @@
+# Synthetic Multiview Summary
+
+| Dataset | Views | PSNR | SSIM | LPIPS | Metrics |
+| --- | ---: | ---: | ---: | ---: | --- |
+| `zero123plus_seed123_steps75_6_700_interval3` |  | 19.0156 | 0.871499 | 0.478934 | `results/metrics/zero123plus_seed123_steps75_6_700_interval3.json` |

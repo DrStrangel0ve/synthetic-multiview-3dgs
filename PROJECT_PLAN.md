@@ -12,7 +12,8 @@
 - Add a generated contact-sheet input contract for multiview images. Done.
 - Support fixed turntable camera assumptions for generated views. Done.
 - Compare generated-view splats against the procedural ground-truth baseline. Done for the first 16-view contact sheet.
-- Next: replace the contact-sheet prompt with a model-native multiview generator and keep the same Nerfstudio data contract.
+- Replace the contact-sheet prompt with a model-native multiview generator and keep the same Nerfstudio data contract. Done with Zero123++ v1.2.
+- Next: improve the Zero123++ path with better seed-image background control, more seeds, and cleaner segmentation/matting.
 
 ## Milestone 3: Evaluation
 
@@ -20,3 +21,4 @@
 - Sweep resolution: 256, 384, 512.
 - Compare known poses vs COLMAP-estimated poses.
 - Publish a table of quality, training time, and exported splat size.
+- Track eval-all separately from holdout metrics so training-view reconstruction is not confused with generalization.

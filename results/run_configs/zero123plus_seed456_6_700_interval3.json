@@ -1,0 +1,9 @@
+{
+  "run_id": "700",
+  "dataset": "datasets/zero123plus_ceramic_idol_seed456_6",
+  "experiment": "zero123plus_seed456_6_700_interval3",
+  "max_iters": 700,
+  "eval_mode": "interval",
+  "eval_interval": 3,
+  "train_split_fraction": 0.9
+}
