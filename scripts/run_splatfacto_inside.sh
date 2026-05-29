@@ -8,10 +8,11 @@ EXPERIMENT="${EXPERIMENT:-ceramic_idol_turntable}"
 RUN_ID="${RUN_ID:-$(date -u +%Y%m%d_%H%M%S)}"
 EXPORT_MODELS="${EXPORT_MODELS:-1}"
 
-mkdir -p results/metrics results/logs results/status exports outputs
+mkdir -p results/metrics results/logs results/status results/run_configs results/summaries exports outputs
 
 status_path="results/status/${EXPERIMENT}.json"
 metrics_path="results/metrics/${EXPERIMENT}.json"
+run_config_path="results/run_configs/${EXPERIMENT}.json"
 train_log="results/logs/${EXPERIMENT}_train.log"
 eval_log="results/logs/${EXPERIMENT}_eval.log"
 export_dir="exports/${EXPERIMENT}"
@@ -20,7 +21,7 @@ python3 - <<PY
 import json
 from pathlib import Path
 
-Path("results/run_config.json").write_text(json.dumps({
+Path("$run_config_path").write_text(json.dumps({
   "run_id": "$RUN_ID",
   "dataset": "$DATASET",
   "experiment": "$EXPERIMENT",
@@ -77,7 +78,10 @@ if [[ "$EXPORT_MODELS" == "1" ]]; then
     >>"$eval_log" 2>&1 || true
 fi
 
-python3 scripts/summarize_metrics.py --metrics "$metrics_path" --dataset "$EXPERIMENT"
+python3 scripts/summarize_metrics.py \
+  --metrics "$metrics_path" \
+  --dataset "$EXPERIMENT" \
+  --output-prefix "results/summaries/${EXPERIMENT}"
 
 python3 - <<PY
 import json

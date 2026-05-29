@@ -1,0 +1,17 @@
+{
+  "experiment_name": "genai_ceramic_idol_16_700",
+  "method_name": "splatfacto",
+  "checkpoint": "outputs/genai_ceramic_idol_16_700/splatfacto/700/nerfstudio_models/step-000000699.ckpt",
+  "results": {
+    "psnr": 17.348848342895508,
+    "psnr_std": NaN,
+    "ssim": 0.8176088333129883,
+    "ssim_std": NaN,
+    "lpips": 0.43227142095565796,
+    "lpips_std": NaN,
+    "num_rays_per_sec": 31052.5625,
+    "num_rays_per_sec_std": NaN,
+    "fps": 0.21058866381645203,
+    "fps_std": NaN
+  }
+}

@@ -12,15 +12,27 @@ from typing import Any
 RUNS = [
     {
         "run": "700_iters",
+        "source": "procedural",
+        "views": 48,
         "iterations": 700,
         "metrics": Path("results/metrics/ceramic_idol_turntable_700.json"),
         "export": Path("exports/ceramic_idol_turntable_700/ceramic_idol_turntable_700.ply"),
     },
     {
         "run": "3000_iters",
+        "source": "procedural",
+        "views": 48,
         "iterations": 3000,
         "metrics": Path("results/metrics/ceramic_idol_turntable_3000.json"),
         "export": Path("exports/ceramic_idol_turntable_3000/ceramic_idol_turntable_3000.ply"),
+    },
+    {
+        "run": "genai_16_views_700",
+        "source": "generated contact sheet",
+        "views": 16,
+        "iterations": 700,
+        "metrics": Path("results/metrics/genai_ceramic_idol_16_700.json"),
+        "export": Path("exports/genai_ceramic_idol_16_700/genai_ceramic_idol_16_700.ply"),
     },
 ]
 
@@ -39,6 +51,8 @@ def row_for(run: dict[str, Any]) -> dict[str, Any]:
     export = run["export"]
     return {
         "run": run["run"],
+        "source": run["source"],
+        "views": run["views"],
         "iterations": run["iterations"],
         "psnr": results.get("psnr"),
         "ssim": results.get("ssim"),
@@ -67,17 +81,17 @@ def main() -> None:
     lines = [
         "# Synthetic Splatfacto Run Comparison",
         "",
-        "| Run | Iterations | PSNR | SSIM | LPIPS | FPS | Export MB |",
-        "| --- | ---: | ---: | ---: | ---: | ---: | ---: |",
+        "| Run | Source | Views | Iterations | PSNR | SSIM | LPIPS | FPS | Export MB |",
+        "| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
     ]
     for row in rows:
         lines.append(
-            f"| `{row['run']}` | {row['iterations']} | {fmt(row['psnr'])} | {fmt(row['ssim'])} | {fmt(row['lpips'])} | {fmt(row['fps'])} | {fmt(row['export_mb'])} |"
+            f"| `{row['run']}` | {row['source']} | {row['views']} | {row['iterations']} | {fmt(row['psnr'])} | {fmt(row['ssim'])} | {fmt(row['lpips'])} | {fmt(row['fps'])} | {fmt(row['export_mb'])} |"
         )
     lines.extend(
         [
             "",
-            "In this first synthetic run, the shorter 700-iteration checkpoint has better PSNR/SSIM, while the 3,000-iteration checkpoint has better LPIPS but a much larger exported splat.",
+            "In this first synthetic run, the controlled procedural 700-iteration checkpoint has the best PSNR/SSIM. The generated contact-sheet run reconstructs, but its lower scores reflect cross-view inconsistency and the smaller 16-view orbit.",
             "",
         ]
     )

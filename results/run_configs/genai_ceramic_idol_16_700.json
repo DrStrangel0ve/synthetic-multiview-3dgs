@@ -1,0 +1,6 @@
+{
+  "run_id": "700",
+  "dataset": "datasets/genai_ceramic_idol_16",
+  "experiment": "genai_ceramic_idol_16_700",
+  "max_iters": 700
+}

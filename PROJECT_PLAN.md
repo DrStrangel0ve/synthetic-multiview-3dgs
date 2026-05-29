@@ -9,9 +9,10 @@
 
 ## Milestone 2: AI Multiview Swap
 
-- Add an `ai_views/` input contract for generated multiview images.
-- Support fixed turntable camera assumptions for generated views.
-- Compare generated-view splats against the procedural ground-truth baseline.
+- Add a generated contact-sheet input contract for multiview images. Done.
+- Support fixed turntable camera assumptions for generated views. Done.
+- Compare generated-view splats against the procedural ground-truth baseline. Done for the first 16-view contact sheet.
+- Next: replace the contact-sheet prompt with a model-native multiview generator and keep the same Nerfstudio data contract.
 
 ## Milestone 3: Evaluation
 
